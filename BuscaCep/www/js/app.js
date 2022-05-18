@@ -1,21 +1,28 @@
-function BuscaCep(){
+function BuscaCep() {
     let cep = document.getElementById('cep').value
- 
-    let resultado = document.getElementById('endereco-completo')
-    
-    resultado.innerHTML = 
+
     $.ajax({
-        type:"GET",
+        type: "GET",
         url: `https://viacep.com.br/ws/${cep}/json/`,
-        success: (function(endereco){
-            console.dir(endereco)
+        success: (function (endereco) {
+            let bairro = endereco.bairro
+            let rua = endereco.logradouro
+            let cidade = endereco.localidade
+            let uf = endereco.uf
+            document.getElementById('endereco-completo').innerHTML =
+            `
+            Rua/Avenida: ${rua}             
+            Bairro: ${bairro}           
+            Cidade: ${cidade} - ${uf}`
+
         })
+
     })
-     
+
 
 }
 
 
-document.getElementById('pesquisar').addEventListener('click', function(){
+document.getElementById('pesquisar').addEventListener('click', function () {
     BuscaCep();
 })
