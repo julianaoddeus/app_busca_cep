@@ -1,10 +1,21 @@
-let cep = document.querySelector('#cep')
-
 function BuscaCep(){
-        console.log("Essa é a função de pesquisa de cep")
+    let cep = document.getElementById('cep').value
+ 
+    let resultado = document.getElementById('endereco-completo')
+    
+    resultado.innerHTML = 
+    $.ajax({
+        type:"GET",
+        url: `https://viacep.com.br/ws/${cep}/json/`,
+        success: (function(endereco){
+            console.dir(endereco)
+        })
+    })
+     
+
 }
 
-let btnPesquisar = document.querySelector('#pesquisar');
-btnPesquisar.addEventListener('click', function(){
 
+document.getElementById('pesquisar').addEventListener('click', function(){
+    BuscaCep();
 })
